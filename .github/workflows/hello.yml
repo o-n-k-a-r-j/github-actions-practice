@@ -1,4 +1,4 @@
-
+\
 name: My First Workflow
 
 on:
@@ -25,4 +25,4 @@ jobs:
         run: ls -la
 
       - name: Show runner OS
-        run: echi "$RUNNER_OS"
+        run: echo "$RUNNER_OS"
