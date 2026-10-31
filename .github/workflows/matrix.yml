@@ -10,9 +10,15 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
+
       matrix:
         os: [ubuntu-latest, windows-latest]
         python-version: ["3.10", "3.11", "3.12"]
+
+        exclude:
+          - os: windows-latest
+            python-version: "3.10"
 
     steps:
       - name: Checkout code
@@ -25,4 +31,11 @@ jobs:
 
       - name: Print Python version
         run: python --version
+
+      - name: Fail Ubuntu Python 3.11
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
+        run: exit 1
+
+      - name: Confirm completion
+        run: echo "Matrix job completed successfully"
 
