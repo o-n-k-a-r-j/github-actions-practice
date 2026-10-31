@@ -3,7 +3,7 @@ name: Daily Scheduled Workflow
 
 on:
   schedule:
-    - cron: '* * * * *'
+    
 
   workflow_dispatch:
 
