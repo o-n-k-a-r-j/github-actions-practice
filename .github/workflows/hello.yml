@@ -14,4 +14,15 @@ jobs:
 
       - name: Welcome Message
         run: echo "Hello from GitHub Actions!"
+	
+      - name: Show current date
+	run: date -u
 
+      - name: Show branch name
+        run: echo "$GITHUB_REF_NAME"
+
+      - name: Show files
+        run: ls -la
+
+      - name: Show runner OS
+        run: echi "$RUNNER_OS"
