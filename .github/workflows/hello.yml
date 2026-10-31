@@ -25,3 +25,11 @@ jobs:
 
       - name: Show runner OS
         run: echo "$RUNNER_OS"
+       
+      
+      - name: Intentionally fail
+        run: exit 1
+
+      - name: This should not run
+        run: echo "I ran after the failure"
+
