@@ -1,0 +1,21 @@
+
+name: Daily Scheduled Workflow
+
+on:
+  schedule:
+    - cron: '10 19 * 10 *'
+
+  workflow_dispatch:
+
+jobs:
+  daily-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print scheduled message
+        run: echo "Daily scheduled check"
+
+      - name: Show UTC date
+        run: date -u
+
+
