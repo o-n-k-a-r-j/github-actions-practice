@@ -17,7 +17,7 @@ jobs:
         run: echo "Hello from GitHub Actions!"
 	
       - name: Show current date
-	run: date -u
+        run: date -u
 
       - name: Show branch name
         run: echo "$GITHUB_REF_NAME"
