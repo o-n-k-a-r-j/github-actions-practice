@@ -28,7 +28,7 @@ jobs:
        
       
       - name: Intentionally fail
-        run: exit 1
+        run: exit 0
 
       - name: This should not run
         run: echo "I ran after the failure"
