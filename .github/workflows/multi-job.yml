@@ -12,7 +12,7 @@ jobs:
         run: echo "building the app" 
 
   test:
-    needs:build
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
