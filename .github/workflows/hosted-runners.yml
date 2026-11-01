@@ -14,6 +14,13 @@ jobs:
           echo "OS: ${{ runner.os }}"
           hostname
           whoami
+      
+      - name: Check installed tools
+        run: |
+          docker --version
+          python3 --version
+          node --version
+          git --version
 
   windows-job:
     runs-on: windows-latest
