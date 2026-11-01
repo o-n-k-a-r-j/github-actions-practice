@@ -1,0 +1,20 @@
+name: Milti job practice
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      -name:Build application
+       run: echo "building the app" 
+
+  test:
+    needs:build
+    runs-on: ubuntu-latest
+
+    steps:
+      -name: Run tests
+       run: echo "running tests"
