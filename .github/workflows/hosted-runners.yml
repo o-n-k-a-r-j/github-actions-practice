@@ -10,6 +10,6 @@ jobs:
     steps:
       - name: Show Ubuntu information
         run: |
-          echo "OS: {{ runner.os }}
+          echo "OS: {{ runner.os }}"
           hostname
           whoami
