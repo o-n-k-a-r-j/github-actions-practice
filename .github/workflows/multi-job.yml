@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name:Build application
+      - name: Build application
         run: echo "building the app" 
 
   test:
