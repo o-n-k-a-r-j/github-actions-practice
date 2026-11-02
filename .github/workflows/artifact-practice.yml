@@ -1,0 +1,29 @@
+
+name: Artifact Upload Practice
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate test report
+        run: |
+          mkdir -p reports
+          echo "Day 44 Test Report" > reports/report.txt
+          echo "Result: PASS" >> reports/report.txt
+          date -u >> reports/report.txt
+
+      - name: Show report
+        run: cat reports/report.txt
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: day44-report
+          path: reports/report.txt
+          if-no-files-found: error
+          retention-days: 7
+
