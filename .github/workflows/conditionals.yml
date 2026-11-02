@@ -1,0 +1,40 @@
+name: Conditionals Practice
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  push-only:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Push event message
+        run: echo "This job runs only for push events"
+
+  conditional-steps:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Main branch only
+        if: github.ref == 'refs/heads/main'
+        run: echo "This is the main branch"
+
+      - name: Show triggering event
+        run: echo "Event is $GITHUB_EVENT_NAME"
+
+      - name: Optional failing step
+        id: demo_failure
+        if: github.event_name == 'workflow_dispatch'
+        continue-on-error: true
+        run: exit 1
+
+      - name: Check previous step failure
+        if: steps.demo_failure.outcome == 'failure'
+        run: echo "Previous step failed, so I am running"
+
+      - name: Finish job
+        run: echo "Conditional practice completed"
+
