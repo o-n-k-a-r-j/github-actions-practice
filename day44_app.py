@@ -1,4 +1,4 @@
 
 def calculate_total(prices):
-    return sum(prices) + 1
+    return sum(prices)
 
