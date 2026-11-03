@@ -1,0 +1,40 @@
+k
+name: Python Dependency Cache Practice
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-with-cache:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip downloads
+        id: pip-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: day44-pip-${{ runner.os }}-${{ hashFiles('day44-requirements.txt') }}
+
+      - name: Show cache result
+        env:
+          CACHE_HIT: ${{ steps.pip-cache.outputs.cache-hit }}
+        run: echo "Cache hit is $CACHE_HIT"
+
+      - name: Install dependencies
+        run: python -m pip install -r day44-requirements.txt
+
+      - name: Run tests
+        run: python -m pytest -q
+
