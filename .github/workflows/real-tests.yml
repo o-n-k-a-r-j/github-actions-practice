@@ -1,0 +1,32 @@
+
+name: Day 44 Real Python Tests
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/day44-*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: python -m pip install -r day44-requirements.txt
+
+      - name: Run automated tests
+        run: python -m pytest -q
+
