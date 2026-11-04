@@ -1,0 +1,36 @@
+
+name: Composite Action Demo
+
+on:
+  workflow_dispatch:
+    inputs:
+      language:
+        description: "Choose greeting language"
+        type: choice
+        required: true
+        default: en
+        options:
+          - en
+          - hi
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use custom greeting action
+        id: greeting
+        uses: ./.github/actions/setup-and-greet
+        with:
+          name: "ChaiShop"
+          language: ${{ inputs.language }}
+
+      - name: Show action output
+        env:
+          GREETED: ${{ steps.greeting.outputs.greeted }}
+        run: echo "Was greeted: $GREETED"
+
+

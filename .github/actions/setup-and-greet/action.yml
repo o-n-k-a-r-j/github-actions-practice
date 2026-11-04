@@ -1,0 +1,52 @@
+
+name: Setup and Greet
+description: "Print a greeting and runner information"
+
+inputs:
+  name:
+    description: "Who should be greeted?"
+    required: true
+
+  language:
+    description: "Greeting language"
+    required: false
+    default: "en"
+
+outputs:
+  greeted:
+    description: "Whether greeting completed"
+    value: ${{ steps.say_hello.outputs.greeted }}
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Print greeting
+      id: say_hello
+      shell: bash
+      env:
+        GREETING_NAME: ${{ inputs.name }}
+        GREETING_LANGUAGE: ${{ inputs.language }}
+
+      run: |
+        case "$GREETING_LANGUAGE" in
+          en)
+            echo "Hello, $GREETING_NAME!"
+            ;;
+          hi)
+            echo "नमस्ते, $GREETING_NAME!"
+            ;;
+          *)
+            echo "Unsupported language"
+            exit 1
+            ;;
+        esac
+
+        echo "greeted=true" >> "$GITHUB_OUTPUT"
+
+    - name: Print runner information
+      shell: bash
+      run: |
+        date -u
+        echo "Runner OS: $RUNNER_OS"
+
