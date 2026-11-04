@@ -32,5 +32,3 @@ jobs:
         env:
           GREETED: ${{ steps.greeting.outputs.greeted }}
         run: echo "Was greeted: $GREETED"
-
-
