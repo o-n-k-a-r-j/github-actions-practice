@@ -1,0 +1,1 @@
+[![Docker Build and Publish](https://github.com/o-n-k-a-r-j/github-actions-practice/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/o-n-k-a-r-j/github-actions-practice/actions/workflows/docker-publish.yml)
