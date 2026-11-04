@@ -1,3 +1,4 @@
+
 name: Reusable Build Workflow
 
 on:
@@ -16,9 +17,17 @@ on:
       docker_token:
         required: true
 
+    outputs:
+      build_version:
+        description: "Generated build version"
+        value: ${{ jobs.build-app.outputs.build_version }}
+
 jobs:
   build-app:
     runs-on: ubuntu-latest
+
+    outputs:
+      build_version: ${{ steps.make_version.outputs.build_version }}
 
     steps:
       - name: Checkout repository
@@ -28,8 +37,7 @@ jobs:
         env:
           APP_NAME: ${{ inputs.app_name }}
           TARGET_ENV: ${{ inputs.environment }}
-        run: |
-          echo "Building $APP_NAME for $TARGET_ENV"
+        run: echo "Building $APP_NAME for $TARGET_ENV"
 
       - name: Check Docker token
         env:
@@ -41,4 +49,13 @@ jobs:
             echo "Docker token is set: false"
             exit 1
           fi
+
+      - name: Generate build version
+        id: make_version
+        run: |
+          SHORT_SHA="${GITHUB_SHA::7}"
+          VERSION="v1.0-$SHORT_SHA"
+
+          echo "build_version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Generated build version: $VERSION"
 
