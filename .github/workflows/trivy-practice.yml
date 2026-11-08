@@ -1,0 +1,21 @@
+
+name: My First Trivy Scan
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Scan Nginx Docker Image
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: 'nginx:alpine'
+          format: 'table'
+          severity: 'HIGH,CRITICAL'
+          exit-code: '0'
